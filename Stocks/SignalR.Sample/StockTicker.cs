@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNet.SignalR.Hubs;
-using TableDependency.EventArgs;
-using TableDependency.Enums;
+using TableDependency.SqlClient.Base.EventArgs;
+using TableDependency.SqlClient.Base.Enums;
 using System.Configuration;
 using System.Data.SqlClient;
 using TableDependency.SqlClient;
-using TableDependency.Mappers;
 using Microsoft.AspNet.SignalR;
+using TableDependency.SqlClient.Base;
 
 namespace Stocks
 {
@@ -28,8 +28,7 @@ namespace Stocks
 
             _tableDependency = new SqlTableDependency<Stock>(
                 ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString,
-                "Stocks",
-                mapper);
+                "Stocks", mapper.ToString());
 
             _tableDependency.OnChanged += SqlTableDependency_Changed;
             _tableDependency.OnError += SqlTableDependency_OnError;
